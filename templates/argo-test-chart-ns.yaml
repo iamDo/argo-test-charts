@@ -1,1 +1,4 @@
-namespace/argo-test-chart created
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: argo-test-chart
