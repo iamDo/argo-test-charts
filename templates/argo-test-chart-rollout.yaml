@@ -10,7 +10,7 @@ spec:
     canary:
       steps:
         - setWeight: 50
-          pause: {duration: 10}
+        - pause: {duration: 10}
   revisionHistoryLimit: 2
   selector:
     matchLabels:
