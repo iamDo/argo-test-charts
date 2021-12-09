@@ -1,11 +1,17 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
-  name: argo-test-chart-nginx-deployment
+  name: argo-test-chart-nginx-rollout
   labels:
     app: nginx
 spec:
-  replicas: 1
+  replicas: 2
+  strategy:
+    canary:
+      steps:
+        - setWeight: 50
+          pause: {duration: 10}
+  revisionHistoryLimit: 2
   selector:
     matchLabels:
       app: nginx
