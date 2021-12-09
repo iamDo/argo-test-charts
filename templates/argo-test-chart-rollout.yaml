@@ -17,6 +17,8 @@ spec:
       app: nginx
   template:
     metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/argo-test-chart-configmap.yaml") . | sha256sum }}
       labels:
         app: nginx
     spec:
