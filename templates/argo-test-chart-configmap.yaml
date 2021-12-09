@@ -7,5 +7,6 @@ data:
     <html>
     <body>
     <h1>{{ .Values.greeting }}</h1>
+    <h2>This is a cool new feature!</h2>
     </body>
     </html>
