@@ -1,1 +1,2 @@
 greeting: "Hello from Helm!"
+message: "This is the important message"

@@ -8,5 +8,6 @@ data:
     <body>
     <h1>{{ .Values.greeting }}</h1>
     <h2>This is a cool new feature!</h2>
+    <h3>Very important message {{.Values.message}} </h3>
     </body>
     </html>
