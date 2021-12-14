@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
   namespace: argo-workflows
-  generateName: post-sync-
+  generateName: hook-echo-
   annotations:
     argocd.argoproj.io/hook: PreSync
 spec:
