@@ -34,7 +34,7 @@ spec:
       image: ghcr.io/iamdo/argocd-cli:13
       command: ["/scripts/entrypoint.sh"]
       env:
-      - name: APPLICATION:
+      - name: APPLICATION
         value: "{{.Values.application}}"
       - name: ARGO_ADMIN_PW
         valueFrom:
