@@ -6,11 +6,15 @@ metadata:
   annotations:
     argocd.argoproj.io/hook: PostSync
 spec:
-  entrypoint: alpine-hello
+  entrypoint: argocd-cli
   templates:
-    - name: alpine-hello
-      container:
-        image: ghcr.io/iamdo/test-image:0.1.0
-        command: [echo]
-        args: ["Hello, World from PostSync hook!"]
-
+  - name: argocd-cli
+    container:
+      image: ghcr.io/iamdo/argocd-cli:11
+      command: ["/scripts/entrypoint.sh"]
+      env:
+      - name: ARGO_ADMIN_PW
+        valueFrom:
+          secretKeyRef:
+            name: argo-admin-pw
+            key: password
