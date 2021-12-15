@@ -6,6 +6,7 @@ metadata:
   annotations:
     argocd.argoproj.io/hook: PreSync
 spec:
+  ttlSecondsAfterFinished: 600
   entrypoint: argocd-cli
   templates:
   - name: argocd-cli
