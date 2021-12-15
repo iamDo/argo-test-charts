@@ -10,16 +10,60 @@ spec:
   entrypoint: argocd-cli
   templates:
   - name: argocd-cli
-    steps:
-    - - name: get-overrides
+    dag:
+      tasks:
+      - name: get-overrides
         template: get-overrides
+      - name: clone-argo-full-poc-repo
+        template: clone-something
+        arguments:
+          parameters:
+          - name: repo-url
+            value: "https://github.com/iamDo/argo-full-poc.git"
+          - name: repo-name
+            value: "argo-full-poc"
+      - name: echo-overrides
+        template: echo-something
+        depends: "get-overrides"
+        arguments:
+          parameters:
+          - name: parameter-overrides
+            value: "{{tasks.get-overrides.outputs.parameters.parameter-overrides}}"
   - name: get-overrides
     container:
-      image: ghcr.io/iamdo/argocd-cli:11
+      image: ghcr.io/iamdo/argocd-cli:13
       command: ["/scripts/entrypoint.sh"]
       env:
+      - name: APPLICATION:
+        value: "{{.Values.application}}"
       - name: ARGO_ADMIN_PW
         valueFrom:
           secretKeyRef:
             name: argo-admin-pw
             key: password
+    outputs:
+      parameters:
+      - name: parameter-overrides
+        valueFrom:
+          path: '/artifacts/parameter-overrides.json'
+  - name: echo-something
+    container:
+      image: alpine
+      command: ["echo"]
+      args: ["{{inputs.parameters.parameter-overrides}}"]
+    inputs:
+      parameters:
+      - name: parameter-overrides
+  - name: clone-something
+    container:
+      image: alpine/git
+      command: ["git"]
+      args: ["clone", "{{inputs.parameters.repo-url}}"]
+    inputs:
+      parameters:
+      - name: repo-url
+      - name: repo-name
+    outputs:
+      artifacts:
+      - name: git-repo
+        path: '/git/{{inputs.parameters.repo-name}}'
