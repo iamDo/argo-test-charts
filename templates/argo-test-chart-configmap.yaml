@@ -9,6 +9,6 @@ data:
     <h1>{{ .Values.greeting }}</h1>
     <h2>A very important message from our sponsor {{.Values.sponsor}} </h2>
     <h3>{{.Values.message}}</h3>
-    <p>We are running {{.Chart.Name}}-{{.Chart.Version}} </p>
+    <p>We are running {{.Chart.Name}}-{{.Chart.Version}}</p>
     </body>
     </html>
