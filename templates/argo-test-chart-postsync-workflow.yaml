@@ -44,7 +44,7 @@ spec:
             value: "{{`{{tasks.get-overrides.outputs.parameters.parameter-overrides}}`}}"
   - name: merge-overrides
     container:
-      image: ghcr.io/iamdo:merge-overrides:latest
+      image: ghcr.io/iamdo/merge-overrides:latest
       command: ["/script/entrypoint.sh"]
       env:
       - name: APPLICATION
