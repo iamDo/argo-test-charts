@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
   namespace: argo-workflows
-  generateName: hook-echo-
+  generateName: update-overrides-
   annotations:
     argocd.argoproj.io/hook: PreSync
 spec:
