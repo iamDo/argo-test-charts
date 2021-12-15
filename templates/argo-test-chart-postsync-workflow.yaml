@@ -31,7 +31,7 @@ spec:
             value: "{{`{{tasks.get-overrides.outputs.parameters.parameter-overrides}}`}}"
       - name: merge-overrides
         template: merge-overrides
-        depends:
+        dependencies:
         - "get-overrides"
         - "clone-argo-full-poc-repo"
         arguments:
