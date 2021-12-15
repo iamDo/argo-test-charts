@@ -46,7 +46,7 @@ spec:
       - name: git-repo
         path: '/inputs'
       - name: parameter-overrides
-        path: '/inputs/parameter-overrides.yaml'
+        path: '/inputs/parameter-overrides.json'
   - name: get-overrides
     container:
       image: ghcr.io/iamdo/argocd-cli:14
