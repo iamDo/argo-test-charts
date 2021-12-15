@@ -24,7 +24,8 @@ spec:
             value: "argo-full-poc"
       - name: echo-overrides
         template: echo-something
-        depends: "get-overrides"
+        dependencies:
+        - "get-overrides"
         arguments:
           parameters:
           - name: parameter-overrides
