@@ -28,7 +28,7 @@ spec:
         arguments:
           parameters:
           - name: parameter-overrides
-            value: "{{tasks.get-overrides.outputs.parameters.parameter-overrides}}"
+            value: "{{`{{tasks.get-overrides.outputs.parameters.parameter-overrides}}`}}"
   - name: get-overrides
     container:
       image: ghcr.io/iamdo/argocd-cli:13
@@ -50,7 +50,7 @@ spec:
     container:
       image: alpine
       command: ["echo"]
-      args: ["{{inputs.parameters.parameter-overrides}}"]
+      args: ["{{`{{inputs.parameters.parameter-overrides}}`}}"]
     inputs:
       parameters:
       - name: parameter-overrides
@@ -58,7 +58,7 @@ spec:
     container:
       image: alpine/git
       command: ["git"]
-      args: ["clone", "{{inputs.parameters.repo-url}}"]
+      args: ["clone", "{{`{{inputs.parameters.repo-url}}`}}"]
     inputs:
       parameters:
       - name: repo-url
@@ -66,4 +66,4 @@ spec:
     outputs:
       artifacts:
       - name: git-repo
-        path: '/git/{{inputs.parameters.repo-name}}'
+        path: '/git/{{`{{inputs.parameters.repo-name}}`}}'
