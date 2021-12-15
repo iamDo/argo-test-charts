@@ -29,6 +29,31 @@ spec:
           parameters:
           - name: parameter-overrides
             value: "{{`{{tasks.get-overrides.outputs.parameters.parameter-overrides}}`}}"
+      - name: merge-overrides
+        template: merge-overrides
+        depends:
+        - "get-overrides"
+        - "clone-argo-full-poc-repo"
+        arguments:
+          artifacts:
+          - name: git-repo
+            from: "{{`{{tasks.clone-argo-full-poc-repo.outputs.artifacts.git-repo}}`}}"
+          parameters:
+          - name: parameter-overrides
+            value: "{{`{{tasks.get-overrides.outputs.parameters.parameter-overrides}}`}}"
+  - name: merge-overrides
+    container:
+      image: ghcr.io/iamdo:merge-overrides:latest
+      command: ["/script/entrypoint.sh"]
+      env:
+      - name: APPLICATION
+        value: "{{.Values.application}}"
+    inputs:
+      parameters:
+      - name: parameter-overrides
+      artifacts:
+      - name: git-repo
+        path: '/inputs'
   - name: get-overrides
     container:
       image: ghcr.io/iamdo/argocd-cli:14
