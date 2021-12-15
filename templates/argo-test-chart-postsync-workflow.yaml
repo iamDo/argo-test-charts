@@ -45,7 +45,7 @@ spec:
   - name: merge-overrides
     container:
       image: ghcr.io/iamdo/merge-overrides:latest
-      command: ["/script/entrypoint.sh"]
+      command: ["/scripts/entrypoint.sh"]
       env:
       - name: APPLICATION
         value: "{{.Values.application}}"
