@@ -31,9 +31,9 @@ spec:
           artifacts:
           - name: git-repo
             from: "{{`{{tasks.clone-argo-full-poc-repo.outputs.artifacts.git-repo}}`}}"
-          parameters:
           - name: parameter-overrides
-            value: "{{`{{tasks.get-overrides.outputs.parameters.parameter-overrides}}`}}"
+            from: "{{`{{tasks.get-overrides.outputs.artifacts.parameter-overrides}}`}}"
+          parameters:
   - name: merge-overrides
     container:
       image: ghcr.io/iamdo/merge-overrides:latest
@@ -42,10 +42,10 @@ spec:
       - name: APPLICATION
         value: "{{.Values.application}}"
     inputs:
-      parameters:
-      - name: parameter-overrides
       artifacts:
       - name: git-repo
+        path: '/inputs'
+      - name: parameter-overrides
         path: '/inputs'
   - name: get-overrides
     container:
@@ -60,10 +60,9 @@ spec:
             name: argo-admin-pw
             key: password
     outputs:
-      parameters:
+      artifacts:
       - name: parameter-overrides
-        valueFrom:
-          path: '/artifacts/parameter-overrides.json'
+        path: '/artifacts/parameter-overrides.json'
   - name: echo-something
     container:
       image: alpine
