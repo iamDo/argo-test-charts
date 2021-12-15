@@ -31,7 +31,7 @@ spec:
             value: "{{`{{tasks.get-overrides.outputs.parameters.parameter-overrides}}`}}"
   - name: get-overrides
     container:
-      image: ghcr.io/iamdo/argocd-cli:13
+      image: ghcr.io/iamdo/argocd-cli:14
       command: ["/scripts/entrypoint.sh"]
       env:
       - name: APPLICATION
