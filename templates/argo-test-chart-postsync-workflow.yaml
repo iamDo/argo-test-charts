@@ -10,6 +10,10 @@ spec:
   entrypoint: argocd-cli
   templates:
   - name: argocd-cli
+    steps:
+    - - name: get-overrides
+        template: get-overrides
+  - name: get-overrides
     container:
       image: ghcr.io/iamdo/argocd-cli:11
       command: ["/scripts/entrypoint.sh"]
