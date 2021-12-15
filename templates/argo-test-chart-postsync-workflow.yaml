@@ -22,14 +22,6 @@ spec:
             value: "https://github.com/iamDo/argo-full-poc.git"
           - name: repo-name
             value: "argo-full-poc"
-      - name: echo-overrides
-        template: echo-something
-        dependencies:
-        - "get-overrides"
-        arguments:
-          parameters:
-          - name: parameter-overrides
-            value: "{{`{{tasks.get-overrides.outputs.parameters.parameter-overrides}}`}}"
       - name: merge-overrides
         template: merge-overrides
         dependencies:
